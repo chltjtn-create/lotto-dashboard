@@ -36,6 +36,12 @@ Enable GitHub Pages in the repository settings and choose the `docs/` folder as 
 
 Detailed deployment steps are in `DEPLOYMENT.md`.
 
+After creating a GitHub repository, publish with:
+
+```powershell
+.\scripts\publish-github.ps1 -RepoUrl "https://github.com/<owner>/<repo>.git"
+```
+
 ## CSV Format
 
 Required headers:

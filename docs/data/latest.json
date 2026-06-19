@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T09:30:53+00:00",
+  "generated_at": "2026-06-19T09:50:30+00:00",
   "draw_count": 0,
   "first_draw": null,
   "last_draw": null,
@@ -213,7 +213,7 @@
     "warning": "Lotto 6/45 is a random game. Past results do not prove future winning numbers."
   },
   "fetch_status": {
-    "ok": false,
-    "message": "Sync failed; using existing data. could not discover latest draw number near estimate 1228: failed to fetch https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1220: URLError"
+    "ok": null,
+    "message": "Sync skipped."
   }
 }

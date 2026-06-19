@@ -7,11 +7,7 @@ Goal: publish the generated dashboard for free with GitHub Actions and GitHub Pa
 Create a GitHub repository and push this folder.
 
 ```powershell
-git add .
-git commit -m "Build lotto dashboard system"
-git branch -M main
-git remote add origin https://github.com/<owner>/<repo>.git
-git push -u origin main
+.\scripts\publish-github.ps1 -RepoUrl "https://github.com/<owner>/<repo>.git"
 ```
 
 ## 2. Enable GitHub Pages
@@ -51,6 +47,20 @@ python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 
 
 If the official endpoint is blocked, the command still rebuilds the dashboard with existing data and writes the fetch error into `docs/data/latest.json`.
 
-## 5. Current Risk
+## 5. Local Preflight
+
+If `python` is available on PATH:
+
+```powershell
+.\scripts\preflight.ps1
+```
+
+If Python is not on PATH, pass the full Python executable:
+
+```powershell
+.\scripts\preflight.ps1 -Python "C:\Path\To\python.exe"
+```
+
+## 6. Current Risk
 
 The official dhlottery endpoint may block some environments or return HTML instead of JSON. The code includes a JSON fetcher and official-page HTML fallback parser, but the final production proof is the first successful GitHub Actions run.
