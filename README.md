@@ -27,7 +27,7 @@ python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 
 
 The repository is set up for the following free sharing flow:
 
-1. GitHub Actions runs every Monday 00:10 KST.
+1. GitHub Actions runs every Saturday 21:30 KST after the Lotto 6/45 announcement window.
 2. The workflow fetches missing Lotto 6/45 draw data from the configured endpoint.
 3. It builds `docs/data/latest.json`, `docs/data/draws.csv`, and `docs/index.html`.
 4. GitHub Pages can serve the `docs/` folder as a free static dashboard.

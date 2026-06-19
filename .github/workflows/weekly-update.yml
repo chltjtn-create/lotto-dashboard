@@ -6,8 +6,9 @@ on:
     branches:
       - main
   schedule:
-    # Monday 00:10 KST is Sunday 15:10 UTC.
-    - cron: "10 15 * * 0"
+    # Saturday 21:30 KST is Saturday 12:30 UTC.
+    # Lotto 6/45 results are announced on Saturday evening.
+    - cron: "30 12 * * 6"
 
 permissions:
   contents: write

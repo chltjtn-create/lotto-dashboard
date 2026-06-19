@@ -27,12 +27,12 @@ GitHub will show the public dashboard URL after the first Pages deployment.
 
 ## 3. Weekly Update
 
-The workflow in `.github/workflows/weekly-update.yml` runs on push, manual dispatch, and every Monday 00:10 KST.
+The workflow in `.github/workflows/weekly-update.yml` runs on push, manual dispatch, and every Saturday 21:30 KST after the Lotto 6/45 announcement window.
 
 It does this:
 
 1. Runs tests.
-2. Fetches missing draw numbers on schedule/manual runs.
+2. Fetches missing draw numbers on schedule/manual runs after Saturday evening results are available.
 3. Generates 10 recommended combinations.
 4. Rebuilds `docs/index.html` and `docs/data/latest.json`.
 5. Commits dashboard changes back to the repository on schedule/manual runs.
