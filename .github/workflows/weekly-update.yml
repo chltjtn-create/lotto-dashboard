@@ -2,16 +2,28 @@ name: Weekly Lotto Dashboard
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
     # Monday 00:10 KST is Sunday 15:10 UTC.
     - cron: "10 15 * * 0"
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: lotto-dashboard-pages
+  cancel-in-progress: false
 
 jobs:
   update-dashboard:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,9 +37,15 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Update dashboard data
-        run: python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 10
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 10 --no-sync
+          else
+            python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 10
+          fi
 
       - name: Commit dashboard changes
+        if: github.event_name != 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -36,3 +54,15 @@ jobs:
             git commit -m "Update weekly lotto dashboard"
             git push
           fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

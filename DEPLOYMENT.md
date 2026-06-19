@@ -10,30 +10,31 @@ Create a GitHub repository and push this folder.
 .\scripts\publish-github.ps1 -RepoUrl "https://github.com/<owner>/<repo>.git"
 ```
 
-## 2. Enable GitHub Pages
+## 2. GitHub Pages
 
-In GitHub:
+The workflow deploys the `docs/` folder with official GitHub Pages Actions.
+
+If GitHub asks for a Pages source, use:
 
 1. Open the repository settings.
 2. Go to Pages.
-3. Set source to "Deploy from a branch".
-4. Select branch `main`.
-5. Select folder `/docs`.
+3. Set source to "GitHub Actions".
 6. Save.
 
-GitHub will show the public dashboard URL after the first Pages build.
+GitHub will show the public dashboard URL after the first Pages deployment.
 
 ## 3. Weekly Update
 
-The workflow in `.github/workflows/weekly-update.yml` runs every Monday 00:10 KST.
+The workflow in `.github/workflows/weekly-update.yml` runs on push, manual dispatch, and every Monday 00:10 KST.
 
 It does this:
 
 1. Runs tests.
-2. Fetches missing draw numbers.
+2. Fetches missing draw numbers on schedule/manual runs.
 3. Generates 10 recommended combinations.
 4. Rebuilds `docs/index.html` and `docs/data/latest.json`.
-5. Commits dashboard changes back to the repository.
+5. Commits dashboard changes back to the repository on schedule/manual runs.
+6. Deploys `docs/` to GitHub Pages.
 
 ## 4. Manual Run
 
