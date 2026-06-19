@@ -1,0 +1,38 @@
+name: Weekly Lotto Dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monday 00:10 KST is Sunday 15:10 UTC.
+    - cron: "10 15 * * 0"
+
+permissions:
+  contents: write
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests
+
+      - name: Update dashboard data
+        run: python -m lotto_analyzer update-site --db data/lotto.db --site-dir docs --count 10
+
+      - name: Commit dashboard changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/draws.csv docs/data/latest.json docs/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Update weekly lotto dashboard"
+            git push
+          fi

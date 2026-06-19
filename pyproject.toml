@@ -1,0 +1,10 @@
+[project]
+name = "lotto-analyzer"
+version = "0.1.0"
+description = "Small standard-library lotto draw analyzer and combination generator."
+requires-python = ">=3.10"
+readme = "README.md"
+authors = [{ name = "lotto-analyzer maintainers" }]
+
+[project.scripts]
+lotto-analyzer = "lotto_analyzer.cli:main"
