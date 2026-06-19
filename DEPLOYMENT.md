@@ -12,13 +12,15 @@ Create a GitHub repository and push this folder.
 
 ## 2. GitHub Pages
 
-The workflow deploys the `docs/` folder with official GitHub Pages Actions.
+The workflow deploys the `docs/` folder to the `gh-pages` branch.
 
 If GitHub asks for a Pages source, use:
 
 1. Open the repository settings.
 2. Go to Pages.
-3. Set source to "GitHub Actions".
+3. Set source to "Deploy from a branch".
+4. Select branch `gh-pages`.
+5. Select folder `/`.
 6. Save.
 
 GitHub will show the public dashboard URL after the first Pages deployment.
