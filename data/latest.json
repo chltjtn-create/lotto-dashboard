@@ -1,0 +1,219 @@
+{
+  "generated_at": "2026-06-27T14:14:32+00:00",
+  "draw_count": 0,
+  "first_draw": null,
+  "last_draw": null,
+  "latest_draw": null,
+  "top_numbers": [],
+  "overdue_numbers": [
+    {
+      "number": 1,
+      "misses": 0
+    },
+    {
+      "number": 2,
+      "misses": 0
+    },
+    {
+      "number": 3,
+      "misses": 0
+    },
+    {
+      "number": 4,
+      "misses": 0
+    },
+    {
+      "number": 5,
+      "misses": 0
+    },
+    {
+      "number": 6,
+      "misses": 0
+    },
+    {
+      "number": 7,
+      "misses": 0
+    },
+    {
+      "number": 8,
+      "misses": 0
+    },
+    {
+      "number": 9,
+      "misses": 0
+    },
+    {
+      "number": 10,
+      "misses": 0
+    },
+    {
+      "number": 11,
+      "misses": 0
+    },
+    {
+      "number": 12,
+      "misses": 0
+    }
+  ],
+  "top_pairs": [],
+  "recommendations": [
+    {
+      "rank": 1,
+      "numbers": [
+        2,
+        4,
+        7,
+        12,
+        16,
+        36
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 2,
+      "numbers": [
+        12,
+        16,
+        17,
+        23,
+        31,
+        36
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 3,
+      "numbers": [
+        26,
+        29,
+        30,
+        31,
+        35,
+        38
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 4,
+      "numbers": [
+        5,
+        7,
+        14,
+        25,
+        35,
+        44
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 5,
+      "numbers": [
+        8,
+        10,
+        11,
+        19,
+        22,
+        45
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 6,
+      "numbers": [
+        22,
+        24,
+        27,
+        35,
+        40,
+        45
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 7,
+      "numbers": [
+        6,
+        25,
+        37,
+        39,
+        40,
+        44
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 8,
+      "numbers": [
+        7,
+        13,
+        20,
+        26,
+        36,
+        43
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 9,
+      "numbers": [
+        5,
+        10,
+        11,
+        14,
+        15,
+        20
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    },
+    {
+      "rank": 10,
+      "numbers": [
+        1,
+        8,
+        21,
+        27,
+        37,
+        45
+      ],
+      "score": 0.0,
+      "reasons": [
+        "No history loaded; random balanced fallback."
+      ]
+    }
+  ],
+  "method": {
+    "summary": "Historical-frequency, overdue, and balance filters. This is analysis, not a guaranteed prediction.",
+    "warning": "Lotto 6/45 is a random game. Past results do not prove future winning numbers."
+  },
+  "fetch_status": {
+    "ok": false,
+    "message": "Sync failed; using existing data. could not discover latest draw number near estimate 1230: failed to fetch https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1222: URLError"
+  }
+}

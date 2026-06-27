@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lotto 6/45 Weekly Dashboard</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --panel: #ffffff;
+      --ink: #202124;
+      --muted: #6b665f;
+      --line: #ded7cb;
+      --red: #d94d3f;
+      --blue: #2364aa;
+      --green: #2f7d59;
+      --gold: #d89b28;
+      --violet: #6b5aa6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header {
+      min-height: 42vh;
+      padding: 40px 20px 28px;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(216, 155, 40, .20), transparent 24%),
+        linear-gradient(135deg, #ffffff 0%, #efe7d8 52%, #d8e5df 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .eyebrow { color: var(--green); font-weight: 700; font-size: 14px; }
+    h1 { margin: 12px 0 10px; font-size: clamp(32px, 5vw, 58px); line-height: 1.05; letter-spacing: 0; }
+    .lead { max-width: 760px; color: var(--muted); font-size: 18px; line-height: 1.65; }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .metric, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+    .metric strong { font-size: 24px; }
+    main { padding: 28px 0 56px; }
+    section { margin-top: 28px; }
+    h2 { margin: 0 0 14px; font-size: 22px; }
+    .latest-row, .recommendations, .charts {
+      display: grid;
+      gap: 14px;
+    }
+    .latest-row { grid-template-columns: 1fr 1fr; }
+    .recommendations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .charts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .balls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .ball {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,.12);
+    }
+    .b1 { background: var(--gold); }
+    .b2 { background: var(--blue); }
+    .b3 { background: var(--red); }
+    .b4 { background: var(--green); }
+    .b5 { background: var(--violet); }
+    .rank { color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+    .score { color: var(--green); font-weight: 700; margin-top: 12px; }
+    .reasons { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.5; }
+    .bar-row { display: grid; grid-template-columns: 34px 1fr 42px; gap: 8px; align-items: center; margin: 8px 0; }
+    .bar-track { height: 12px; background: #eee7dc; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--blue); }
+    .overdue .bar-fill { background: var(--red); }
+    .pairs .bar-fill { background: var(--green); }
+    .notice { color: var(--muted); line-height: 1.6; }
+    a { color: var(--blue); }
+    @media (max-width: 860px) {
+      .status-grid, .latest-row, .recommendations, .charts { grid-template-columns: 1fr; }
+      header { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Weekly Lotto 6/45 analysis</div>
+      <h1>로또 번호 분석 대시보드</h1>
+      <p class="lead">매주 월요일 자동 갱신을 목표로 최신 당첨 번호를 수집하고, 빈도, 미출현, 조합 균형 기준으로 참고용 추천 번호 10개를 보여줍니다.</p>
+      <div class="status-grid" id="metrics"></div>
+      <p class="lead" id="fetchStatus"></p>
+    </div>
+  </header>
+  <main class="wrap">
+    <section>
+      <h2>최신 당첨 번호</h2>
+      <div class="latest-row" id="latest"></div>
+    </section>
+    <section>
+      <h2>추천 번호 10개</h2>
+      <div class="recommendations" id="recommendations"></div>
+    </section>
+    <section>
+      <h2>분석 지표</h2>
+      <div class="charts">
+        <div class="card" id="topNumbers"></div>
+        <div class="card overdue" id="overdueNumbers"></div>
+        <div class="card pairs" id="pairs"></div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>분석 기준</h2>
+      <p class="notice">이 대시보드는 통계 요약과 조합 필터링을 제공합니다. 로또 추첨은 무작위 사건이므로 과거 번호가 미래 당첨을 보장하지 않습니다. 추천 번호는 자동 생성된 참고 자료입니다.</p>
+      <p class="notice">Generated at 2026-06-27T14:14:32+00:00</p>
+    </section>
+  </main>
+  <script id="payload" type="application/json">{"generated_at": "2026-06-27T14:14:32+00:00", "draw_count": 0, "first_draw": null, "last_draw": null, "latest_draw": null, "top_numbers": [], "overdue_numbers": [{"number": 1, "misses": 0}, {"number": 2, "misses": 0}, {"number": 3, "misses": 0}, {"number": 4, "misses": 0}, {"number": 5, "misses": 0}, {"number": 6, "misses": 0}, {"number": 7, "misses": 0}, {"number": 8, "misses": 0}, {"number": 9, "misses": 0}, {"number": 10, "misses": 0}, {"number": 11, "misses": 0}, {"number": 12, "misses": 0}], "top_pairs": [], "recommendations": [{"rank": 1, "numbers": [2, 4, 7, 12, 16, 36], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 2, "numbers": [12, 16, 17, 23, 31, 36], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 3, "numbers": [26, 29, 30, 31, 35, 38], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 4, "numbers": [5, 7, 14, 25, 35, 44], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 5, "numbers": [8, 10, 11, 19, 22, 45], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 6, "numbers": [22, 24, 27, 35, 40, 45], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 7, "numbers": [6, 25, 37, 39, 40, 44], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 8, "numbers": [7, 13, 20, 26, 36, 43], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 9, "numbers": [5, 10, 11, 14, 15, 20], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}, {"rank": 10, "numbers": [1, 8, 21, 27, 37, 45], "score": 0.0, "reasons": ["No history loaded; random balanced fallback."]}], "method": {"summary": "Historical-frequency, overdue, and balance filters. This is analysis, not a guaranteed prediction.", "warning": "Lotto 6/45 is a random game. Past results do not prove future winning numbers."}, "fetch_status": {"ok": false, "message": "Sync failed; using existing data. could not discover latest draw number near estimate 1230: failed to fetch https://www.dhlottery.co.kr/common.do?method=getLottoNumber\u0026drwNo=1222: URLError"}}</script>
+  <script>
+    const data = JSON.parse(document.getElementById('payload').textContent);
+    const ballClass = n => 'b' + Math.min(5, Math.floor((Number(n) - 1) / 10) + 1);
+    const balls = nums => '<div class="balls">' + nums.map(n => `<span class="ball ${ballClass(n)}">${String(n).padStart(2, '0')}</span>`).join('') + '</div>';
+    const metric = (label, value) => `<div class="metric"><span>${label}</span><strong>${value ?? '-'}</strong></div>`;
+    document.getElementById('metrics').innerHTML = [
+      metric('저장 회차', data.draw_count),
+      metric('최신 회차', data.last_draw),
+      metric('추천 조합', data.recommendations.length),
+      metric('갱신 UTC', (data.generated_at || '').slice(0, 10))
+    ].join('');
+    const status = data.fetch_status || { ok: null, message: 'Not checked.' };
+    document.getElementById('fetchStatus').textContent = '수집 상태: ' + status.message;
+    const latest = data.latest_draw;
+    document.getElementById('latest').innerHTML = latest
+      ? `<div class="card"><div class="rank">${latest.draw_no}회 · ${latest.date || '-'}</div>${balls(latest.numbers)}</div><div class="card"><div class="rank">보너스</div>${balls([latest.bonus])}</div>`
+      : '<div class="card notice">아직 수집된 실제 회차 데이터가 없습니다.</div>';
+    document.getElementById('recommendations').innerHTML = data.recommendations.map(item => `
+      <div class="card">
+        <div class="rank">#${item.rank}</div>
+        ${balls(item.numbers)}
+        <div class="score">Score ${item.score}</div>
+        <ul class="reasons">${item.reasons.map(reason => `<li>${reason}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+    function barList(title, rows, valueKey, labelFn) {
+      const max = Math.max(1, ...rows.map(row => row[valueKey]));
+      return `<h2>${title}</h2>` + rows.map(row => {
+        const label = labelFn(row);
+        const value = row[valueKey];
+        return `<div class="bar-row"><strong>${label}</strong><div class="bar-track"><div class="bar-fill" style="width:${Math.max(4, value / max * 100)}%"></div></div><span>${value}</span></div>`;
+      }).join('');
+    }
+    document.getElementById('topNumbers').innerHTML = barList('빈도 상위', data.top_numbers, 'count', row => row.number);
+    document.getElementById('overdueNumbers').innerHTML = barList('미출현 상위', data.overdue_numbers, 'misses', row => row.number);
+    document.getElementById('pairs').innerHTML = barList('번호쌍 상위', data.top_pairs, 'count', row => row.numbers.join('-'));
+  </script>
+</body>
+</html>
