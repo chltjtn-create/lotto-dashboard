@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T14:40:39+00:00",
+  "generated_at": "2026-06-27T14:14:32+00:00",
   "draw_count": 0,
   "first_draw": null,
   "last_draw": null,
@@ -61,11 +61,11 @@
       "rank": 1,
       "numbers": [
         2,
-        8,
-        15,
-        21,
-        35,
-        41
+        4,
+        7,
+        12,
+        16,
+        36
       ],
       "score": 0.0,
       "reasons": [
@@ -75,12 +75,12 @@
     {
       "rank": 2,
       "numbers": [
-        1,
+        12,
+        16,
         17,
-        21,
+        23,
         31,
-        34,
-        37
+        36
       ],
       "score": 0.0,
       "reasons": [
@@ -90,12 +90,12 @@
     {
       "rank": 3,
       "numbers": [
-        2,
-        6,
-        12,
-        16,
-        27,
-        34
+        26,
+        29,
+        30,
+        31,
+        35,
+        38
       ],
       "score": 0.0,
       "reasons": [
@@ -105,11 +105,11 @@
     {
       "rank": 4,
       "numbers": [
-        1,
+        5,
+        7,
+        14,
         25,
-        30,
-        38,
-        39,
+        35,
         44
       ],
       "score": 0.0,
@@ -120,12 +120,12 @@
     {
       "rank": 5,
       "numbers": [
+        8,
+        10,
         11,
-        13,
-        14,
-        29,
-        30,
-        32
+        19,
+        22,
+        45
       ],
       "score": 0.0,
       "reasons": [
@@ -135,12 +135,12 @@
     {
       "rank": 6,
       "numbers": [
-        10,
-        16,
-        19,
-        26,
-        33,
-        34
+        22,
+        24,
+        27,
+        35,
+        40,
+        45
       ],
       "score": 0.0,
       "reasons": [
@@ -150,12 +150,12 @@
     {
       "rank": 7,
       "numbers": [
-        3,
-        5,
-        10,
-        21,
-        24,
-        37
+        6,
+        25,
+        37,
+        39,
+        40,
+        44
       ],
       "score": 0.0,
       "reasons": [
@@ -165,12 +165,12 @@
     {
       "rank": 8,
       "numbers": [
-        1,
         7,
         13,
-        21,
-        29,
-        37
+        20,
+        26,
+        36,
+        43
       ],
       "score": 0.0,
       "reasons": [
@@ -180,12 +180,12 @@
     {
       "rank": 9,
       "numbers": [
-        2,
+        5,
         10,
-        16,
-        26,
-        29,
-        38
+        11,
+        14,
+        15,
+        20
       ],
       "score": 0.0,
       "reasons": [
@@ -196,10 +196,10 @@
       "rank": 10,
       "numbers": [
         1,
-        12,
-        26,
-        30,
-        36,
+        8,
+        21,
+        27,
+        37,
         45
       ],
       "score": 0.0,
@@ -214,6 +214,6 @@
   },
   "fetch_status": {
     "ok": false,
-    "message": "Sync failed; using existing data. could not discover latest draw number near estimate 1229: failed to fetch https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1221: URLError"
+    "message": "Sync failed; using existing data. could not discover latest draw number near estimate 1230: failed to fetch https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1222: URLError"
   }
 }
